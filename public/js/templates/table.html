@@ -1,0 +1,46 @@
+<div>
+	<div>
+		<p>Набор данных: 
+			<button class="btn btn-primary"  ng-click="chooseData('bigData')">Большой</button>
+			<button class="btn btn-primary" ng-click="chooseData('smallData')">Маленький</button>
+			<button class="btn btn-primary" ng-click="chooseData('customData')">Свой</button>
+		</p> 
+	</div>
+	<div ng-show="display">
+		<br>
+		<label>
+			<input type="text" ng-model="searchName" placeholder="Search">
+		</label>
+		<br>
+		<br>
+		<table class="col-md-6 table table-bordered table-striped table-hover">
+			<thead>
+				<tr>
+					<th ng-click="sortType = 'id'; sortReverse = !sortReverse">id</th>
+					<th ng-click="sortType = 'name'; sortReverse = !sortReverse">Name</th>
+					<th ng-click="sortType = 'price'; sortReverse = !sortReverse">Price</th>
+					<th ng-click="sortType = 'quantity'; sortReverse = !sortReverse">Quantity</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in products |  orderBy :sortType:sortReverse | filter: searchName : paginate" ng-click="selected(item)">
+					<td>{{item.id}}</td>
+					<td>{{item.name}}</td>
+					<td>{{item.price}}</td>
+					<td>{{item.quantity}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="col-md-6 table table-bordered" >
+			<tr ng-repeat="item in additionalTable track by $index">
+				<td>{{item.id}}</td>
+				<td>{{item.name}}</td>
+				<td>{{item.price}}</td>
+				<td>{{item.quantity}}</td>
+			</tr>
+		</table>
+		<ul uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemPerPage" max-size="numOfPages"></ul>
+	</div>
+</div>
+
+
